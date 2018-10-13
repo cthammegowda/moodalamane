@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Ibbani - Nature Hut - Green Mountains - Water stream | Sakleshpur | Western Ghats |  | Karnataka | India</title>
+		<link rel="stylesheet" type="text/css" href="styles.css"/>
+		<link rel="stylesheet" type="text/css" href="grids-min.css"/>
+		<link rel="stylesheet" type="text/css" href="jquery-ui.css"/>
+		<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="jquery-ui.js"></script>
+		<script type="text/javascript" src="jquery.corner.js"></script>
+
+		<script>
+		$(function() {
+			$( "#arrival" ).datepicker({
+				minDate:1,
+				dateFormat:"yy-mm-dd",
+				numberOfMonths: 2,
+				showButtonPanel: true
+			});
+			$( "#dep" ).datepicker({
+				minDate:2,
+				dateFormat:"yy-mm-dd",
+				numberOfMonths: 2,
+				showButtonPanel: true
+			});
+		});
+
+		function submitForm(){
+			var name = $('#name').val();
+			if(name == ''){
+				alert("Please enter the name");
+				return;
+			}
+			var reg = /^([A-Za-z ])+$/;
+			if(reg.test(name) == false) {
+			  alert('Name can contain A-Z or space!');
+			  return false;
+			}
+			var ph = $('#phone').val();
+			if(ph == ''){
+				alert("Please enter the Phone");
+				return;
+			}
+			var em = $('#email').val();
+			if(em == ''){
+				alert("Please enter the mail address");
+				return;
+			}
+			var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if(reg.test(em) == false) {
+			  alert('Invalid Email Address');
+			  return false;
+			}
+			var arr = $('#arrival').val();
+			if(arr == ''){
+				alert("Please select the arrival date");
+				return;
+			}
+			var dep = $('#dep').val();
+			if(dep == ''){
+				alert("Please select the depature date");
+				return;
+			}
+                        //alert(arr+" "+dep);
+                        if (dep < arr) {
+				alert("Arrival Date should be lower than Departure Date");
+				return;
+			}
+			var adult = $('#adult').val();
+			if(adult == ''){
+				alert("Please enter no of adults");
+				return;
+			}
+			var num = /^([0-9])+$/;
+			if(num.test(adult) == false) {
+			  alert('No of adults Should be a numeric!');
+			  return false;
+			}
+			var child = $('#child').val();
+			if(child == ''){
+				alert("Please enter no of children");
+				return;
+			}
+			if(num.test(child) == false) {
+			  alert('No of children Should be a numeric!');
+			  return false;
+			}
+			var veg = $('#veg').val();
+			if(veg && num.test(veg) == false) {
+			  alert('Veg/Non-veg Should be a numeric!');
+			  return false;
+			}
+			var nonveg = $('#nonveg').val();
+			if(nonveg && num.test(nonveg) == false) {
+			  alert('Veg/Non-veg Should be a numeric!');
+			  return false;
+			}
+			var add = escape($('#address').val());
+			var oth = escape($('#others').val());
+			$('#btn-hdr').hide();
+			$('#processing').show();
+			$.ajax({
+			   type: "GET",
+			   url:"http://ibbaniresorts.com/mail2.php?name="+name+"&phone="+ph+"&email="+em+"&arrival="+arr+"&depature="+dep+"&adult="+adult+"&children="+child+"&veg="+veg+"&nonveg="+nonveg+"&address="+add+"&others="+oth,
+			   success: function(msg){
+				$('#processing').hide();
+			    $('#msg').show();
+			   }
+			 });
+		}
+		</script>
+	</head>
+	<body class="body_bg">
+		<div id="page_bg">
+			<div id="page_bg1">
+				<div id="header">
+				<img src="images/ibbani.png" alt="Ibbani"/>
+				</div>
+				<div class="pill_m">
+					<div id="pillmenu">
+						<ul>
+							<li class=""><a href="index.html">Home</a></li>
+							<li class=""><a href="gallery.html">Gallery</a></li>
+							 
+							<li class=""><a href="events.html">Activities</a></li>
+							<li class=""><a href="facilities.html">Facilities</a></li>
+							<li class=""><a href="tariff.html">Tariff</a></li>
+							<li class=""><a href="contact.html">How to Reach</a></li>
+							<li class="selected"><a href="enquiry.html">Booking</a></li>
+						</ul>
+					</div>
+				</div>
+			<div class="center">
+				<div id="wrapper">
+					<div id="content">
+						<div class="box">
+							<div class="yui3-u contentbody">
+							        <div class="sub-heading">
+										Enquiry
+									</div>
+									 <div class="sub-text-home">
+										<div class="yui3-u-2-3">
+												<form name="enquiry">
+												<div class="yui3-u-1 row">
+													<div class="yui3-u"><span>*</span>Name:</div>
+													<div class="yui3-u-1-4"><input type="text" name="name" id="name" value=""/></div>
+													<div class="yui3-u"><span>*</span>Phone:</div>
+													<div class="yui3-u-1-4"><input type="text" name="phone" id="phone" value=""/></div>
+												</div>
+												<div class="yui3-u-1 row">
+													<div class="yui3-u"><span>*</span>Email:</div>
+													<div class="yui3-u-1-2"><input type="text" name="email" id="email" value=""/></div>
+												</div>
+												<div class="yui3-u-1 row">
+													<div class="yui3-u"><span>*</span>Arrival Date:</div>
+													<div class="yui3-u-1-6"><input type="text" name="arrival" id="arrival" value=""/></div>
+													<div class="yui3-u"><span>*</span>Departure Date:</div>
+													<div class="yui3-u-1-6"><input type="text" name="dep" id="dep" value=""/></div>
+												</div>
+												<div class="yui3-u-1 row">
+													<div class="yui3-u"><span>*</span>Adults:</div>
+													<div class="yui3-u-1-12"><input type="text" name="adult" id="adult" value=""/></div>
+													<div class="yui3-u"><span>*</span>Children:</div>
+													<div class="yui3-u-1-12"><input type="text" name="child" id="child" value=""/></div>
+												</div>
+												<div class="yui3-u-1 row">
+													<div class="yui3-u">Veg:</div>
+													<div class="yui3-u-1-12"><input type="text" name="veg" id="veg" value=""/></div>
+													<div class="yui3-u">Non-Veg:</div>
+													<div class="yui3-u-1-12"><input type="text" name="nonveg" id="nonveg" value=""/></div>
+												</div>
+												<div class="yui3-u-1 row">
+													<div class="yui3-u">Address:</div>
+													<div class="yui3-u-3-4"><textarea name="address" id="address"></textarea></div>
+												</div>
+												<div class="yui3-u-1 row">
+													<div class="yui3-u">Others:</div>
+													<div class="yui3-u-3-4"><textarea name="others" id="others"></textarea></div>
+												</div>
+												<div class="yui3-u-1">
+													<B>Note:</B> <span>*</span> required fields.
+												</div>
+												<div class="yui3-u-1 row" id="btn-hdr">
+													<div class="yui3-u-1-4"><input type="reset" value="Clear Form"/></div>
+													<div class="yui3-u-1-4"><input type="button" value="Make Reservation" onClick="submitForm();"/></div>
+												</div>
+												<div class="yui3-u-1 row" id="processing" style="display:none;text-align:center;">
+													Making request please wait ...
+												</div>
+												<div class="yui3-u-1 row" id="msg" style="display:none;text-align:center;font-weight:bold;">
+													Thank you. We will confirm your request as soon as possible!.
+												</div>
+												</form>
+											</div>
+											<div class="yui3-u-1-3" style="width:30%">
+												<fieldset class="contact">
+													<legend>Contact Us</legend>
+													 <B>Address : Ibbani</B><br/> 
+													 Bilisere village, Devaldakere Post,<br/> Hanbal,Sakleshpur, Hassan Dist.<br/>
+													<B>Phone :</B>8453812727 <br/>
+													<B>Email: </B><a href="mailto:contactus@ibbaniresorts.com">contactus@ibbaniresorts.com</a>
+												</fieldset>
+											</div>
+									 </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		 </div>
+		</div>
+
+
+
+		<div id="footer">
+		&copy 2011 Ibbani. All Rights Reserved.
+		<div style="color:white;font-family:tahoma;padding:5px;text-align:right;">Powered by <a href="http://www.versatiletech.in" target="_blank" style="color:white;font-weight:bold;text-decoration:none;">Versatiletech</a></div>
+		</div>
+	
+</body>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21688393-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
